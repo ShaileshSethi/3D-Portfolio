@@ -9,7 +9,7 @@ import { PORTFOLIO_DATA } from './data/portfolio';
 
 function App() {
   return (
-    <div className="w-full h-screen bg-studio-black overflow-hidden relative">
+    <div className="w-full h-screen bg-black overflow-hidden relative">
       {/* 3D Canvas */}
       <Canvas
         camera={{ position: [0, 4, 8], fov: 45 }}
