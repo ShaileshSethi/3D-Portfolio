@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import { Scene } from './components/3d/Scene';
 import { Overlay } from './components/ui/Overlay';
 import { HtmlProjects } from './components/ui/HtmlProjects';
+import { Cursor } from './components/ui/Cursor';
 import { PORTFOLIO_DATA } from './data/portfolio';
 
 function App() {
@@ -23,6 +24,9 @@ function App() {
           </ScrollControls>
         </Suspense>
       </Canvas>
+
+      {/* Custom Cursor */}
+      <Cursor />
 
       {/* HTML Overlay wrapped in Scroll */}
       <Overlay />
