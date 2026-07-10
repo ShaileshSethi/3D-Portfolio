@@ -1,11 +1,10 @@
 import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { ScrollControls, Loader } from '@react-three/drei';
+import { ScrollControls } from '@react-three/drei';
 import * as THREE from 'three';
 import { Scene } from './components/3d/Scene';
 import { Overlay } from './components/ui/Overlay';
 import { HtmlProjects } from './components/ui/HtmlProjects';
-import { Cursor } from './components/ui/Cursor';
 import { PORTFOLIO_DATA } from './data/portfolio';
 
 function App() {
@@ -25,14 +24,8 @@ function App() {
         </Suspense>
       </Canvas>
 
-      {/* Custom Cursor */}
-      <Cursor />
-
       {/* HTML Overlay wrapped in Scroll */}
       <Overlay />
-      
-      {/* Premium Loading Screen */}
-      <Loader containerStyles={{ background: '#050505' }} innerStyles={{ width: '300px' }} barStyles={{ background: '#FFF' }} dataStyles={{ fontSize: '14px', fontFamily: 'monospace' }} />
     </div>
   );
 }

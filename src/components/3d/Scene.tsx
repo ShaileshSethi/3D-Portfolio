@@ -3,7 +3,7 @@ import { Turntable } from './Turntable';
 import { Camera } from './Camera';
 // import { Hologram } from './Hologram';
 import { StitchEnvironment } from './StitchEnvironment';
-import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing';
+
 export function Scene() {
   return (
     <>
@@ -43,12 +43,6 @@ export function Scene() {
 
       {/* Local Shadows for Turntable */}
       <ContactShadows position={[0, -1.79, 0]} opacity={0.8} scale={15} blur={2.5} far={4} color="#000" />
-      
-      {/* Cinematic Post-Processing */}
-      <EffectComposer disableNormalPass>
-        <Bloom luminanceThreshold={0.5} mipmapBlur intensity={1.5} />
-        <Vignette eskil={false} offset={0.1} darkness={1.1} />
-      </EffectComposer>
     </>
   );
 }

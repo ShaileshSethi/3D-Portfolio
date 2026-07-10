@@ -1,5 +1,4 @@
 import { Scroll } from '@react-three/drei';
-import { motion } from 'framer-motion';
 import { PORTFOLIO_DATA } from '../../data/portfolio';
 
 export function HtmlProjects() {
@@ -14,24 +13,15 @@ export function HtmlProjects() {
           const imageUrl = `https://picsum.photos/seed/${project.id}/400/200`;
 
           return (
-            <div 
-              key={project.id} 
-              className="w-full h-screen flex items-center justify-center md:justify-start px-4 md:px-0 md:pl-24"
-              style={{ perspective: 1000 }}
+            <div
+              key={project.id}
+              className="w-full h-screen flex items-center justify-start pl-8 md:pl-24"
             >
-              <motion.div 
-                className="w-full max-w-md md:w-96 flex flex-col text-aluminum bg-black/60 border border-white/20 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden pointer-events-auto"
-                whileHover={{ 
-                  scale: 1.02, 
-                  rotateY: 5, 
-                  rotateX: 2,
-                  borderColor: 'rgba(255, 255, 255, 0.4)',
-                  boxShadow: '0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.1)'
-                }}
-                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              <div
+                className="w-96 flex flex-col text-aluminum bg-black/60 border border-white/20 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden pointer-events-auto"
               >
                 {/* Image Header with Title and Badge */}
-                <div 
+                <div
                   className="w-full h-48 relative flex items-end p-4"
                   style={{
                     backgroundImage: `url(${imageUrl})`,
@@ -40,7 +30,7 @@ export function HtmlProjects() {
                   }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                  
+
                   {project.result && (
                     <div className="absolute top-4 right-4 px-2 py-1 bg-black/50 backdrop-blur-md border border-white/20 text-walnut-light text-xs font-bold uppercase tracking-wider rounded">
                       {project.result}
@@ -68,11 +58,11 @@ export function HtmlProjects() {
 
                   <div className="flex gap-6 mt-4">
                     {project.links.map(link => (
-                      <a 
-                        key={link.label} 
-                        href={link.url} 
-                        target="_blank" 
-                        rel="noreferrer" 
+                      <a
+                        key={link.label}
+                        href={link.url}
+                        target="_blank"
+                        rel="noreferrer"
                         className="text-sm font-medium text-white border-b border-transparent hover:border-white transition-all"
                       >
                         {link.label}
@@ -80,7 +70,7 @@ export function HtmlProjects() {
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </div>
           );
         })}

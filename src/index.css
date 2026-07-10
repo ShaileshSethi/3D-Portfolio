@@ -19,13 +19,12 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  cursor: none;
 }
 
 /* Glassmorphism utility */
 @layer components {
   .glass-panel {
-    @apply bg-[var(--glass-bg)] backdrop-blur-xl border border-[var(--glass-border)] shadow-[0_20px_60px_rgba(0,0,0,0.5)];
+    @apply bg-[var(--glass-bg)] backdrop-blur-xl border border-[var(--glass-border)] shadow-[0_20px_60px_rgba(0, 0, 0, 0.5)];
   }
 }
 
@@ -46,8 +45,4 @@ h4,
 h5,
 h6 {
   font-family: var(--font-syne);
-}
-
-* {
-  cursor: none !important;
 }
