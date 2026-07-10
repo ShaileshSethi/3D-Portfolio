@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-syne: "Syne", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --color-studio-black: #0a0a0a;
+  --color-studio-matte: #131313;
+  --color-aluminum: #e2e2e2;
+  --color-aluminum-dim: #c6c6c6;
+  --color-aluminum-dark: #3a3939;
+  --color-walnut: #8c7355;
+  --color-walnut-light: #e0c29f;
+}
+
+body {
+  @apply bg-studio-black text-aluminum font-sans;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism utility */
+@layer components {
+  .glass-panel {
+    @apply bg-[var(--glass-bg)] backdrop-blur-xl border border-[var(--glass-border)] shadow-[0_20px_60px_rgba(0,0,0,0.5)];
+  }
+}
+
+/* Hide scrollbar for clean cinematic look */
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-syne);
+}
