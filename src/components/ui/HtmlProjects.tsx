@@ -1,4 +1,5 @@
 import { Scroll } from '@react-three/drei';
+import { motion } from 'framer-motion';
 import { PORTFOLIO_DATA } from '../../data/portfolio';
 
 export function HtmlProjects() {
@@ -15,10 +16,19 @@ export function HtmlProjects() {
           return (
             <div 
               key={project.id} 
-              className="w-full h-screen flex items-center justify-start pl-8 md:pl-24"
+              className="w-full h-screen flex items-center justify-center md:justify-start px-4 md:px-0 md:pl-24"
+              style={{ perspective: 1000 }}
             >
-              <div 
-                className="w-96 flex flex-col text-aluminum bg-black/60 border border-white/20 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden pointer-events-auto"
+              <motion.div 
+                className="w-full max-w-md md:w-96 flex flex-col text-aluminum bg-black/60 border border-white/20 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden pointer-events-auto"
+                whileHover={{ 
+                  scale: 1.02, 
+                  rotateY: 5, 
+                  rotateX: 2,
+                  borderColor: 'rgba(255, 255, 255, 0.4)',
+                  boxShadow: '0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.1)'
+                }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               >
                 {/* Image Header with Title and Badge */}
                 <div 
@@ -70,7 +80,7 @@ export function HtmlProjects() {
                     ))}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           );
         })}
