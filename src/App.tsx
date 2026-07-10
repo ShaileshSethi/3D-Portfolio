@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { ScrollControls } from '@react-three/drei';
+import { ScrollControls, Loader } from '@react-three/drei';
 import * as THREE from 'three';
 import { Scene } from './components/3d/Scene';
 import { Overlay } from './components/ui/Overlay';
@@ -26,6 +26,9 @@ function App() {
 
       {/* HTML Overlay wrapped in Scroll */}
       <Overlay />
+      
+      {/* Premium Loading Screen */}
+      <Loader containerStyles={{ background: '#050505' }} innerStyles={{ width: '300px' }} barStyles={{ background: '#FFF' }} dataStyles={{ fontSize: '14px', fontFamily: 'monospace' }} />
     </div>
   );
 }
