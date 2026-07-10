@@ -7,7 +7,7 @@ export function HtmlProjects() {
     switch (index) {
       case 0: // About
         return (
-          <motion.div 
+          <motion.div
             className="w-full max-w-md md:w-96 flex flex-col text-aluminum bg-black/70 rounded-2xl shadow-[0_0_15px_rgba(255,255,255,0.05)] p-8"
             whileHover={{ scale: 1.02, rotateY: -5, rotateX: 2, boxShadow: '0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(136,136,255,0.2)' }}
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
@@ -29,7 +29,7 @@ export function HtmlProjects() {
         );
       case 1: // Achievements
         return (
-          <motion.div 
+          <motion.div
             className="w-full max-w-md md:w-96 flex flex-col text-aluminum bg-black/70 rounded-2xl shadow-[0_0_15px_rgba(255,255,255,0.05)] p-8"
             whileHover={{ scale: 1.02, rotateY: -5, rotateX: 2, boxShadow: '0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(136,136,255,0.2)' }}
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
@@ -50,7 +50,7 @@ export function HtmlProjects() {
         );
       case 2: // Skills
         return (
-          <motion.div 
+          <motion.div
             className="w-full max-w-md md:w-96 flex flex-col text-aluminum bg-black/70 rounded-2xl shadow-[0_0_15px_rgba(255,255,255,0.05)] p-8"
             whileHover={{ scale: 1.02, rotateY: -5, rotateX: 2, boxShadow: '0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(136,136,255,0.2)' }}
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
@@ -74,7 +74,7 @@ export function HtmlProjects() {
         );
       case 3: // Contact
         return (
-          <motion.div 
+          <motion.div
             className="w-full max-w-md md:w-96 flex flex-col text-aluminum bg-black/70 rounded-2xl shadow-[0_0_15px_rgba(255,255,255,0.05)] p-8"
             whileHover={{ scale: 1.02, rotateY: -5, rotateX: 2, boxShadow: '0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(136,136,255,0.2)' }}
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
@@ -116,8 +116,8 @@ export function HtmlProjects() {
           const isEven = index % 2 === 0;
 
           return (
-            <motion.div 
-              key={project.id} 
+            <motion.div
+              key={project.id}
               className={`w-full h-screen flex flex-col items-center justify-center md:justify-between px-4 md:px-16 lg:px-24 gap-8 md:gap-0 ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}
               style={{ perspective: 1000 }}
               initial={{ opacity: 0, y: 50 }}
@@ -126,17 +126,17 @@ export function HtmlProjects() {
               transition={{ duration: 0.5, ease: 'easeOut' }}
             >
               {/* PROJECT CARD */}
-              <motion.div 
+              <motion.div
                 className="w-full max-w-md md:w-96 flex flex-col text-aluminum bg-black/70 rounded-2xl shadow-[0_0_15px_rgba(255,255,255,0.05)] overflow-hidden pointer-events-auto"
-                whileHover={{ 
-                  scale: 1.02, 
-                  rotateY: isEven ? 5 : -5, 
+                whileHover={{
+                  scale: 1.02,
+                  rotateY: isEven ? 5 : -5,
                   rotateX: 2,
                   boxShadow: '0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(136,136,255,0.2)'
                 }}
               >
                 {/* Image Header with Title and Badge */}
-                <div 
+                <div
                   className="w-full h-48 relative flex items-end p-4"
                   style={{
                     backgroundImage: `url(${imageUrl})`,
@@ -145,7 +145,7 @@ export function HtmlProjects() {
                   }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                  
+
                   {project.result && (
                     <div className="absolute top-4 right-4 px-2 py-1 bg-black/50 backdrop-blur-md border border-white/20 text-walnut-light text-xs font-bold uppercase tracking-wider rounded">
                       {project.result}
@@ -173,11 +173,11 @@ export function HtmlProjects() {
 
                   <div className="flex gap-6 mt-4">
                     {project.links.map(link => (
-                      <a 
-                        key={link.label} 
-                        href={link.url} 
-                        target="_blank" 
-                        rel="noreferrer" 
+                      <a
+                        key={link.label}
+                        href={link.url}
+                        target="_blank"
+                        rel="noreferrer"
                         className="text-sm font-medium text-white border-b border-transparent hover:border-white transition-all"
                       >
                         {link.label}
