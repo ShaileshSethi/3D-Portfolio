@@ -1,6 +1,6 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Float, Html } from '@react-three/drei';
+import { Float, Html, useScroll } from '@react-three/drei';
 import * as THREE from 'three';
 
 export function Bot(props: any) {
@@ -11,11 +11,34 @@ export function Bot(props: any) {
   const rightArmRef = useRef<THREE.Group>(null);
   const glowMatRef = useRef<THREE.MeshPhongMaterial>(null);
 
+  const scroll = useScroll();
+  const [botState, setBotState] = useState({ active: false, text: "Welcome to my portfolio!" });
+  const [roll, setRoll] = useState(0);
+
+  useEffect(() => {
+    const handler = (e: any) => {
+      setBotState(prev => ({ ...prev, ...e.detail }));
+    };
+    window.addEventListener('bot-action', handler);
+    return () => window.removeEventListener('bot-action', handler);
+  }, []);
+
+  const handleClick = (e: any) => {
+    e.stopPropagation();
+    setRoll(r => r + Math.PI * 2);
+  };
+
   useFrame((state) => {
     const time = state.clock.getElapsedTime() * 2; 
     
     if (botRef.current) {
+      const isHero = scroll.offset < 0.15;
+      const shouldBeVisible = isHero || botState.active;
+      const targetScale = shouldBeVisible ? 1 : 0.001; // use 0.001 instead of 0 to avoid matrix issues
+      
+      botRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
       botRef.current.position.y = Math.sin(time) * 0.2;
+      botRef.current.rotation.z += (roll - botRef.current.rotation.z) * 0.1;
     }
     if (headRef.current) {
       const mouseX = state.pointer.x * 0.5;
@@ -45,15 +68,20 @@ export function Bot(props: any) {
         <Html transform center position={[0, 2.8, 0]}>
           <div 
             className="font-syne text-5xl font-bold whitespace-nowrap text-[#00ffff]"
-            style={{ textShadow: '0 0 20px #00ffff, 0 0 40px #00ffff, 0 0 80px #00ffff' }}
+            style={{ textShadow: '0 0 20px #00ffff, 0 0 40px #00ffff, 0 0 80px #00ffff', transition: 'opacity 0.3s' }}
           >
-            Welcome to my portfolio!
+            {botState.text}
           </div>
         </Html>
       </Float>
 
       {/* Bot group */}
-      <group ref={botRef}>
+      <group 
+        ref={botRef} 
+        onClick={handleClick} 
+        onPointerEnter={() => document.body.style.cursor = 'pointer'}
+        onPointerLeave={() => document.body.style.cursor = 'auto'}
+      >
         {/* Body */}
         <mesh>
           <cylinderGeometry args={[0.8, 1, 1.5, 6]} />

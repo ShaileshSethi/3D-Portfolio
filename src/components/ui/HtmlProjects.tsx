@@ -125,7 +125,6 @@ export function HtmlProjects() {
               viewport={{ once: false, margin: "-25% 0px -25% 0px" }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
             >
-              {/* PROJECT CARD */}
               <motion.div
                 className="w-full max-w-md md:w-96 flex flex-col text-aluminum bg-black/70 rounded-2xl shadow-[0_0_15px_rgba(255,255,255,0.05)] overflow-hidden pointer-events-auto"
                 whileHover={{
@@ -134,6 +133,8 @@ export function HtmlProjects() {
                   rotateX: 2,
                   boxShadow: '0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(136,136,255,0.2)'
                 }}
+                onMouseEnter={() => window.dispatchEvent(new CustomEvent('bot-action', { detail: { active: true, text: `Scanning ${project.title}...` } }))}
+                onMouseLeave={() => window.dispatchEvent(new CustomEvent('bot-action', { detail: { active: false, text: 'Welcome to my portfolio!' } }))}
               >
                 {/* Image Header with Title and Badge */}
                 <div
