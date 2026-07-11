@@ -34,8 +34,7 @@ export function StitchEnvironment() {
           <bufferAttribute
             attach="attributes-position"
             count={200}
-            array={particlesGeo}
-            itemSize={3}
+            args={[particlesGeo, 3]}
           />
         </bufferGeometry>
         <pointsMaterial size={0.05} color="#8888ff" transparent opacity={0.8} />

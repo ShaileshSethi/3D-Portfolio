@@ -1,8 +1,9 @@
-import { Environment, Sparkles, ContactShadows, SoftShadows } from '@react-three/drei';
+import { Environment, Sparkles, ContactShadows } from '@react-three/drei';
 import { Turntable } from './Turntable';
 import { Camera } from './Camera';
 // import { Hologram } from './Hologram';
 import { StitchEnvironment } from './StitchEnvironment';
+import { Bot } from './Bot';
 
 export function Scene() {
   return (
@@ -17,6 +18,7 @@ export function Scene() {
 
       {/* Scene Elements */}
       <Turntable />
+      <Bot position={[3, -0.5, -2]} rotation={[0, -0.5, 0]} scale={[0.6, 0.6, 0.6]} />
       {/* <Hologram /> */}
       <Camera />
 
