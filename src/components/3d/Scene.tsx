@@ -18,7 +18,7 @@ export function Scene() {
 
       {/* Scene Elements */}
       <Turntable />
-      <Bot position={[3, -0.5, -2]} rotation={[0, -0.5, 0]} scale={[0.6, 0.6, 0.6]} />
+      <Bot position={[3, 0.5, -2]} rotation={[0, -0.5, 0]} scale={[0.6, 0.6, 0.6]} />
       {/* <Hologram /> */}
       <Camera />
 
