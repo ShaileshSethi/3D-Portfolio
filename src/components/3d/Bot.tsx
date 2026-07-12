@@ -29,13 +29,13 @@ export function Bot(props: any) {
   };
 
   useFrame((state) => {
-    const time = state.clock.getElapsedTime() * 2; 
-    
+    const time = state.clock.getElapsedTime() * 2;
+
     if (botRef.current) {
       const isHero = scroll.offset < 0.15;
       const shouldBeVisible = isHero || botState.active;
       const targetScale = shouldBeVisible ? 1 : 0.001; // use 0.001 instead of 0 to avoid matrix issues
-      
+
       botRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
       botRef.current.position.y = Math.sin(time) * 0.2;
       botRef.current.rotation.z += (roll - botRef.current.rotation.z) * 0.1;
@@ -66,7 +66,7 @@ export function Bot(props: any) {
       {/* Welcome Message */}
       <Float speed={2} rotationIntensity={0.1} floatIntensity={0.2} floatingRange={[-0.1, 0.1]}>
         <Html transform center position={[0, 2.8, 0]}>
-          <div 
+          <div
             className="font-syne text-5xl font-bold whitespace-nowrap text-[#00ffff]"
             style={{ textShadow: '0 0 20px #00ffff, 0 0 40px #00ffff, 0 0 80px #00ffff', transition: 'opacity 0.3s' }}
           >
@@ -76,9 +76,9 @@ export function Bot(props: any) {
       </Float>
 
       {/* Bot group */}
-      <group 
-        ref={botRef} 
-        onClick={handleClick} 
+      <group
+        ref={botRef}
+        onClick={handleClick}
         onPointerEnter={() => document.body.style.cursor = 'pointer'}
         onPointerLeave={() => document.body.style.cursor = 'auto'}
       >

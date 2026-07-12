@@ -17,7 +17,7 @@ function App() {
         dpr={[1, 2]}
       >
         <Suspense fallback={null}>
-          <ScrollControls pages={PORTFOLIO_DATA.projects.length + 1} damping={0.1}>
+          <ScrollControls pages={PORTFOLIO_DATA.projects.length + 2} damping={0.1}>
             <Scene />
             <HtmlProjects />
           </ScrollControls>

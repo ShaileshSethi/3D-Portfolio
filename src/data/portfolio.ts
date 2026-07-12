@@ -85,6 +85,7 @@ export const PORTFOLIO_DATA = {
     email: "shaileshtunes@gmail.com",
     linkedin: "https://linkedin.com/in/shailesh-sethi",
     github: "https://github.com/shaileshsethi",
+    instagram: "https://instagram.com/shailesh-sethi",
     footer: "© 2026 Shailesh Sethi. Engineered for the Future.",
   },
 };

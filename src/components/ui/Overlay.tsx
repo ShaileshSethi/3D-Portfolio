@@ -6,7 +6,7 @@ import { Code, Briefcase } from 'lucide-react';
 function playStartupSound() {
   const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
   if (!AudioContext) return;
-  
+
   const ctx = new AudioContext();
   const osc1 = ctx.createOscillator();
   const osc2 = ctx.createOscillator();
@@ -15,27 +15,27 @@ function playStartupSound() {
 
   osc1.type = 'sawtooth';
   osc2.type = 'square';
-  
+
   filter.type = 'lowpass';
   filter.frequency.value = 100;
-  
+
   osc1.connect(filter);
   osc2.connect(filter);
   filter.connect(gain);
   gain.connect(ctx.destination);
 
   const now = ctx.currentTime;
-  
+
   // Sci-fi power-up sweep
   osc1.frequency.setValueAtTime(50, now);
   osc1.frequency.exponentialRampToValueAtTime(300, now + 1.5);
-  
+
   osc2.frequency.setValueAtTime(55, now);
   osc2.frequency.exponentialRampToValueAtTime(450, now + 1.5);
-  
+
   filter.frequency.setValueAtTime(100, now);
   filter.frequency.exponentialRampToValueAtTime(5000, now + 1.0);
-  
+
   gain.gain.setValueAtTime(0, now);
   gain.gain.linearRampToValueAtTime(0.3, now + 0.1);
   gain.gain.exponentialRampToValueAtTime(0.01, now + 2.5);
@@ -59,13 +59,13 @@ export function Overlay() {
       {/* Intro Gate */}
       <AnimatePresence>
         {!entered && (
-          <motion.div 
+          <motion.div
             className="absolute inset-0 z-50 flex items-center justify-center bg-black"
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
           >
-            <button 
+            <button
               onClick={handleEnter}
               className="text-white font-syne text-xl uppercase tracking-[0.3em] hover:text-cyan-400 transition-colors duration-500 animate-pulse cursor-pointer border border-white/20 px-8 py-4 rounded hover:border-cyan-400/50 hover:bg-cyan-400/10"
             >
@@ -79,7 +79,7 @@ export function Overlay() {
       {entered && (
         <div className="absolute top-0 left-0 w-full h-full pointer-events-none flex flex-col justify-between p-8 md:p-12 z-40">
           {/* Header */}
-          <motion.header 
+          <motion.header
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
@@ -100,7 +100,7 @@ export function Overlay() {
           </motion.header>
 
           {/* Footer / Hint */}
-          <motion.footer 
+          <motion.footer
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
