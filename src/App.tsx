@@ -14,7 +14,7 @@ function App() {
       <Canvas
         camera={{ position: [0, 4, 8], fov: 45 }}
         gl={{ antialias: true, alpha: false, toneMapping: THREE.ACESFilmicToneMapping }}
-        dpr={[1, 2]}
+        dpr={[1, 1.5]}
       >
         <Suspense fallback={null}>
           <ScrollControls pages={PORTFOLIO_DATA.projects.length + 2} damping={0.1}>

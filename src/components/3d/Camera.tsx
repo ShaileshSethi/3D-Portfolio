@@ -37,7 +37,7 @@ export function Camera() {
       );
       
       // Target position in Social Dimension (y=50)
-      const endPos = new THREE.Vector3(0, 50, 15);
+      const endPos = new THREE.Vector3(0, 50, 25);
       
       // Interpolate position using ease function for smooth takeoff
       const easePos = 1 - Math.pow(1 - normalizedScroll, 3);

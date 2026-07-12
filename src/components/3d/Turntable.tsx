@@ -43,34 +43,34 @@ export function Turntable() {
   return (
     <group ref={groupRef} position={[0, -1.8, 0]}>
       {/* Rubber Feet */}
-      <mesh position={[-3, 0.1, -2]} material={rubber} castShadow>
+      <mesh position={[-3, 0.1, -2]} material={rubber}>
         <cylinderGeometry args={[0.3, 0.3, 0.2, 32]} />
       </mesh>
-      <mesh position={[3, 0.1, -2]} material={rubber} castShadow>
+      <mesh position={[3, 0.1, -2]} material={rubber}>
         <cylinderGeometry args={[0.3, 0.3, 0.2, 32]} />
       </mesh>
-      <mesh position={[-3, 0.1, 2]} material={rubber} castShadow>
+      <mesh position={[-3, 0.1, 2]} material={rubber}>
         <cylinderGeometry args={[0.3, 0.3, 0.2, 32]} />
       </mesh>
-      <mesh position={[3, 0.1, 2]} material={rubber} castShadow>
+      <mesh position={[3, 0.1, 2]} material={rubber}>
         <cylinderGeometry args={[0.3, 0.3, 0.2, 32]} />
       </mesh>
 
       {/* Solid Walnut Base */}
-      <mesh position={[0, 0.4, 0]} material={walnut} castShadow receiveShadow>
+      <mesh position={[0, 0.4, 0]} material={walnut}>
         <boxGeometry args={[8, 0.4, 6]} />
       </mesh>
 
       {/* Aluminum Top Plate */}
-      <mesh position={[0, 0.65, 0]} material={aluminum} castShadow receiveShadow>
+      <mesh position={[0, 0.65, 0]} material={aluminum}>
         <boxGeometry args={[7.8, 0.1, 5.8]} />
       </mesh>
 
       {/* Buttons & Knobs */}
-      <mesh position={[-3.2, 0.75, 2.2]} material={chrome} castShadow>
+      <mesh position={[-3.2, 0.75, 2.2]} material={chrome}>
         <cylinderGeometry args={[0.15, 0.15, 0.1, 32]} />
       </mesh>
-      <mesh position={[-2.7, 0.75, 2.2]} material={chrome} castShadow>
+      <mesh position={[-2.7, 0.75, 2.2]} material={chrome}>
         <cylinderGeometry args={[0.1, 0.1, 0.1, 32]} />
       </mesh>
       <mesh position={[-3.2, 0.75, 1.6]} material={redLed}>
@@ -80,28 +80,20 @@ export function Turntable() {
       {/* The Platter and Vinyl */}
       <group ref={platterRef} position={[-0.8, 0.75, 0]}>
         {/* Platter Base */}
-        <mesh material={aluminum} castShadow receiveShadow>
+        <mesh material={aluminum}>
           <cylinderGeometry args={[2.4, 2.4, 0.2, 64]} />
         </mesh>
 
         {/* Rubber Mat */}
-        <mesh position={[0, 0.11, 0]} material={matteBlack} receiveShadow>
+        <mesh position={[0, 0.11, 0]} material={matteBlack}>
           <cylinderGeometry args={[2.35, 2.35, 0.02, 64]} />
         </mesh>
 
         {/* Vinyl Record */}
-        <mesh position={[0, 0.13, 0]} castShadow receiveShadow>
+        <mesh position={[0, 0.13, 0]}>
           <cylinderGeometry args={[2.3, 2.3, 0.04, 64]} />
           {/* Use a very dark grey/black with low metalness so it stays black under bright spotlight */}
           <meshStandardMaterial color="#030303" roughness={0.4} metalness={0.1} />
-
-          {/* Detailed Grooves */}
-          {Array.from({ length: 15 }).map((_, i) => (
-            <mesh key={i} position={[0, 0.021, 0]} rotation={[Math.PI / 2, 0, 0]}>
-              <ringGeometry args={[1.0 + (i * 0.08), 1.02 + (i * 0.08), 64]} />
-              <meshBasicMaterial color="#000000" opacity={0.3} transparent />
-            </mesh>
-          ))}
 
           {/* Engraved Project Markers */}
           {PORTFOLIO_DATA.projects.map((project, i) => {
@@ -140,19 +132,19 @@ export function Turntable() {
 
       {/* Tonearm Base */}
       <group position={[2.5, 0.8, -1.8]}>
-        <mesh material={aluminum} castShadow>
+        <mesh material={aluminum}>
           <cylinderGeometry args={[0.6, 0.6, 0.2, 32]} />
         </mesh>
-        <mesh position={[0, 0.3, 0]} material={chrome} castShadow>
+        <mesh position={[0, 0.3, 0]} material={chrome}>
           <cylinderGeometry args={[0.4, 0.4, 0.4, 32]} />
         </mesh>
         {/* Tonearm Arm */}
         <group position={[0, 0.4, 0]} rotation={[0, 0.5, 0]}>
-          <mesh position={[-1.6, 0, 0]} rotation={[0, 0, Math.PI / 2]} material={chrome} castShadow>
+          <mesh position={[-1.6, 0, 0]} rotation={[0, 0, Math.PI / 2]} material={chrome}>
             <cylinderGeometry args={[0.04, 0.04, 3.2, 16]} />
           </mesh>
           {/* Headshell */}
-          <mesh position={[-3.3, -0.05, 0]} material={matteBlack} castShadow>
+          <mesh position={[-3.3, -0.05, 0]} material={matteBlack}>
             <boxGeometry args={[0.3, 0.1, 0.15]} />
           </mesh>
         </group>

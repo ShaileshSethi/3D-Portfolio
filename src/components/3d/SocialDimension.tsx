@@ -2,12 +2,11 @@ import { Float, Text, Edges, Sparkles } from '@react-three/drei';
 import { PORTFOLIO_DATA } from '../../data/portfolio';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
-import { useRef, useState, useMemo } from 'react';
+import { useRef, useState } from 'react';
 
 export function SocialDimension() {
   const groupRef = useRef<THREE.Group>(null);
   const ring1Ref = useRef<THREE.Mesh>(null);
-  const ring2Ref = useRef<THREE.Mesh>(null);
   const ring3Ref = useRef<THREE.Mesh>(null);
   
   // Rotating the entire dimension and rings
@@ -20,25 +19,20 @@ export function SocialDimension() {
       ring1Ref.current.rotation.x = Math.sin(t * 0.5) * 0.5;
       ring1Ref.current.rotation.y += 0.01;
     }
-    if (ring2Ref.current) {
-      ring2Ref.current.rotation.x = Math.cos(t * 0.4) * 0.5;
-      ring2Ref.current.rotation.y -= 0.015;
-    }
     if (ring3Ref.current) {
       ring3Ref.current.rotation.z = Math.sin(t * 0.3) * 0.5;
       ring3Ref.current.rotation.x += 0.01;
     }
   });
 
-  const Card = ({ position, rotation, url, label, color }: any) => {
+  const Card = ({ position, rotation, url, label, color, icon }: any) => {
     const [hovered, setHovered] = useState(false);
-    const scale = hovered ? 1.1 : 1;
     
-    // Create an HDR color for glowing
-    const hdrColor = useMemo(() => new THREE.Color(color).multiplyScalar(hovered ? 3 : 1), [color, hovered]);
+    // Smooth hover animation using math
+    const scale = hovered ? 1.05 : 1;
     
     return (
-      <Float floatIntensity={hovered ? 1 : 3} rotationIntensity={0.5} speed={hovered ? 4 : 2}>
+      <Float floatIntensity={2} rotationIntensity={0.5} speed={2}>
         <group 
           position={position} 
           rotation={rotation}
@@ -47,35 +41,69 @@ export function SocialDimension() {
           onPointerOut={() => { document.body.style.cursor = 'auto'; setHovered(false); }}
           onClick={() => window.open(url, '_blank')}
         >
-          {/* Main Card Body */}
+          {/* Main Card Body (Wide button shape) */}
           <mesh>
-            <boxGeometry args={[4.5, 6, 0.2]} />
-            <meshPhysicalMaterial 
-              color={hovered ? color : "#050505"} 
+            <boxGeometry args={[6, 1.8, 0.1]} />
+            <meshStandardMaterial 
+              color="#000000" 
               transparent 
-              opacity={hovered ? 0.9 : 0.7}
-              roughness={0.1}
-              metalness={0.9}
-              transmission={0.5}
-              thickness={0.5}
+              opacity={0.7}
+              roughness={0.5}
             />
-            {/* Glowing Edges */}
-            <Edges scale={1.02} threshold={15}>
-              <lineBasicMaterial color={hdrColor} toneMapped={false} />
+            {/* White border / Glowing edges on hover */}
+            <Edges scale={1.01} threshold={15}>
+              <lineBasicMaterial color={hovered ? color : "#ffffff"} transparent opacity={hovered ? 1 : 0.1} toneMapped={false} />
             </Edges>
           </mesh>
 
-          {/* Text inside the card */}
+          {/* Icon (Front) */}
           <Text
-            position={[0, 0, 0.15]}
-            fontSize={0.7}
-            color={hovered ? "#ffffff" : color}
+            position={[-1.5, 0, 0.06]}
+            fontSize={0.8}
+            color="#ffffff"
+            anchorX="center"
+            anchorY="middle"
+          >
+            {icon}
+          </Text>
+
+          {/* Text (Front) */}
+          <Text
+            position={[0.5, 0, 0.06]}
+            fontSize={0.4}
+            color={hovered ? color : "#ffffff"}
             anchorX="center"
             anchorY="middle"
             letterSpacing={0.1}
           >
             {label}
-            <meshBasicMaterial color={hdrColor} toneMapped={false} />
+            <meshBasicMaterial color={hovered ? color : "#ffffff"} toneMapped={false} />
+          </Text>
+
+          {/* Icon (Back) */}
+          <Text
+            position={[1.5, 0, -0.06]}
+            rotation={[0, Math.PI, 0]}
+            fontSize={0.8}
+            color="#ffffff"
+            anchorX="center"
+            anchorY="middle"
+          >
+            {icon}
+          </Text>
+
+          {/* Text (Back) */}
+          <Text
+            position={[-0.5, 0, -0.06]}
+            rotation={[0, Math.PI, 0]}
+            fontSize={0.4}
+            color={hovered ? color : "#ffffff"}
+            anchorX="center"
+            anchorY="middle"
+            letterSpacing={0.1}
+          >
+            {label}
+            <meshBasicMaterial color={hovered ? color : "#ffffff"} toneMapped={false} />
           </Text>
         </group>
       </Float>
@@ -104,10 +132,6 @@ export function SocialDimension() {
         <torusGeometry args={[4.5, 0.05, 16, 100]} />
         <meshBasicMaterial color={new THREE.Color("#ff00ff").multiplyScalar(1.5)} toneMapped={false} />
       </mesh>
-      <mesh ref={ring2Ref}>
-        <torusGeometry args={[5.5, 0.02, 16, 100]} />
-        <meshBasicMaterial color={new THREE.Color("#00ffff").multiplyScalar(2)} toneMapped={false} />
-      </mesh>
       <mesh ref={ring3Ref}>
         <torusGeometry args={[6.5, 0.02, 16, 100]} />
         <meshBasicMaterial color={new THREE.Color("#ffffff").multiplyScalar(1)} toneMapped={false} />
@@ -120,6 +144,7 @@ export function SocialDimension() {
         url={PORTFOLIO_DATA.contact.github}
         label="GITHUB"
         color="#ffffff"
+        icon="💻"
       />
 
       {/* LinkedIn */}
@@ -129,6 +154,7 @@ export function SocialDimension() {
         url={PORTFOLIO_DATA.contact.linkedin}
         label="LINKEDIN"
         color="#00ffff"
+        icon="👔"
       />
 
       {/* Instagram */}
@@ -138,6 +164,7 @@ export function SocialDimension() {
         url={PORTFOLIO_DATA.contact.instagram}
         label="INSTAGRAM"
         color="#ff00ff"
+        icon="📷"
       />
     </group>
   );

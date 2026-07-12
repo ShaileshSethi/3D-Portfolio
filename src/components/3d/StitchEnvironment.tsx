@@ -7,7 +7,7 @@ export function StitchEnvironment() {
 
   // Floating particles matching code.html
   const particlesGeo = useMemo(() => {
-    const particlesCount = 200;
+    const particlesCount = 100; // Reduced from 200
     const posArray = new Float32Array(particlesCount * 3);
     for(let i = 0; i < particlesCount * 3; i++) {
       posArray[i] = (Math.random() - 0.5) * 15;
@@ -33,7 +33,7 @@ export function StitchEnvironment() {
         <bufferGeometry>
           <bufferAttribute
             attach="attributes-position"
-            count={200}
+            count={100}
             args={[particlesGeo, 3]}
           />
         </bufferGeometry>
