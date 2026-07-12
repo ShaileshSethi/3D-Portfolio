@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import { Float, Html, useScroll } from '@react-three/drei';
 import * as THREE from 'three';
 
-export function Bot(props: any) {
+export function Bot({ isSocialDimension = false, ...props }: any) {
   const botRef = useRef<THREE.Group>(null);
   const headRef = useRef<THREE.Group>(null);
   const thrustGlowRef = useRef<THREE.Mesh>(null);
@@ -33,7 +33,8 @@ export function Bot(props: any) {
 
     if (botRef.current) {
       const isHero = scroll.offset < 0.15;
-      const shouldBeVisible = isHero || botState.active;
+      const isEnd = isSocialDimension && scroll.offset > 0.8;
+      const shouldBeVisible = isHero || isEnd || botState.active;
       const targetScale = shouldBeVisible ? 1 : 0.001; // use 0.001 instead of 0 to avoid matrix issues
 
       botRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
@@ -65,7 +66,7 @@ export function Bot(props: any) {
     <group {...props}>
       {/* Welcome Message */}
       <Float speed={2} rotationIntensity={0.1} floatIntensity={0.2} floatingRange={[-0.1, 0.1]}>
-        <Html transform center position={[0, 2.8, 0]}>
+        <Html transform center position={[0, 2.8, 0]} distanceFactor={15} style={{ pointerEvents: 'none' }}>
           <div
             className="font-syne text-5xl font-bold whitespace-nowrap text-[#00ffff]"
             style={{ textShadow: '0 0 20px #00ffff, 0 0 40px #00ffff, 0 0 80px #00ffff', transition: 'opacity 0.3s' }}

@@ -105,12 +105,12 @@ export function HtmlProjects() {
   };
 
   return (
-    <Scroll html style={{ width: '100%', height: '100%' }}>
+    <Scroll html style={{ width: '100%', height: '100%', pointerEvents: 'none' }}>
       {/* 
         We use a wrapper to offset the start of the projects.
         The first 100vh (page 0) is reserved for the Hero section.
       */}
-      <div className="w-full flex flex-col pt-[100vh]">
+      <div className="w-full flex flex-col pt-[100vh] pointer-events-none">
         {PORTFOLIO_DATA.projects.map((project, index) => {
           const imageUrl = `https://picsum.photos/seed/${project.id}/400/200`;
           const isEven = index % 2 === 0;

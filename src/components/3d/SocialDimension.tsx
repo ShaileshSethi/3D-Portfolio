@@ -3,6 +3,7 @@ import { PORTFOLIO_DATA } from '../../data/portfolio';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import { useRef, useState } from 'react';
+import { Bot } from './Bot';
 
 export function SocialDimension() {
   const groupRef = useRef<THREE.Group>(null);
@@ -37,9 +38,21 @@ export function SocialDimension() {
           position={position} 
           rotation={rotation}
           scale={[scale, scale, scale]}
-          onPointerOver={() => { document.body.style.cursor = 'pointer'; setHovered(true); }}
-          onPointerOut={() => { document.body.style.cursor = 'auto'; setHovered(false); }}
-          onClick={() => window.open(url, '_blank')}
+          onPointerOver={(e) => { 
+            e.stopPropagation();
+            document.body.style.cursor = 'pointer'; 
+            setHovered(true); 
+            window.dispatchEvent(new CustomEvent('bot-action', { detail: { active: true, text: `Connecting to ${label}...` } }));
+          }}
+          onPointerOut={() => { 
+            document.body.style.cursor = 'auto'; 
+            setHovered(false); 
+            window.dispatchEvent(new CustomEvent('bot-action', { detail: { active: false, text: 'Welcome to my portfolio!' } }));
+          }}
+          onClick={(e) => {
+            e.stopPropagation();
+            window.open(url, '_blank');
+          }}
         >
           {/* Main Card Body (Wide button shape) */}
           <mesh>
@@ -166,6 +179,9 @@ export function SocialDimension() {
         color="#ff00ff"
         icon="📷"
       />
+
+      {/* Guide Bot in Social Dimension */}
+      <Bot isSocialDimension position={[0, 5, 0]} scale={1.2} />
     </group>
   );
 }
