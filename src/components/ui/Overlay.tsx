@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PORTFOLIO_DATA } from '../../data/portfolio';
-import { Code, Briefcase } from 'lucide-react';
+import { Code, Briefcase, Hand } from 'lucide-react';
 
 function playStartupSound() {
   const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
@@ -46,7 +46,12 @@ function playStartupSound() {
   osc2.stop(now + 3);
 }
 
-export function Overlay() {
+interface OverlayProps {
+  gestureMode?: boolean;
+  setGestureMode?: (mode: boolean) => void;
+}
+
+export function Overlay({ gestureMode = false, setGestureMode }: OverlayProps) {
   const [entered, setEntered] = useState(false);
 
   const handleEnter = () => {
@@ -89,7 +94,21 @@ export function Overlay() {
               <h1 className="text-white font-syne text-xl tracking-wide font-bold">{PORTFOLIO_DATA.hero.name}</h1>
               <p className="text-aluminum-dim font-inter text-xs tracking-widest uppercase mt-1">Industrial Designer / Dev</p>
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-4 items-center">
+              {setGestureMode && (
+                <button
+                  onClick={() => setGestureMode(!gestureMode)}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-mono transition-colors ${
+                    gestureMode 
+                      ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300 shadow-[0_0_10px_rgba(34,211,238,0.2)]' 
+                      : 'bg-white/5 border-white/10 text-aluminum hover:text-white hover:bg-white/10'
+                  }`}
+                  title="Toggle Neural Link (Webcam Gestures)"
+                >
+                  <Hand size={14} className={gestureMode ? 'animate-pulse' : ''} />
+                  <span className="hidden sm:inline">GESTURE MODE</span>
+                </button>
+              )}
               <a href={PORTFOLIO_DATA.contact.github} target="_blank" rel="noreferrer" className="text-aluminum-dim hover:text-white transition-colors" title="GitHub">
                 <Code size={18} />
               </a>
@@ -110,7 +129,7 @@ export function Overlay() {
               {PORTFOLIO_DATA.hero.summary}
             </div>
             <div className="text-walnut font-mono text-xs tracking-widest uppercase animate-pulse">
-              Scroll to explore
+              {gestureMode ? 'Pinch & drag to explore' : 'Scroll to explore'}
             </div>
           </motion.footer>
         </div>
